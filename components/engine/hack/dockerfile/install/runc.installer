@@ -1,14 +1,14 @@
 #!/bin/sh
 
 # When updating RUNC_COMMIT, also update runc in vendor.conf accordingly
-RUNC_COMMIT=a592beb5bc4c4092b1b1bac971afed27687340c5
+RUNC_COMMIT=7c653fae1eb311bf4545b434ab6dd7767d4c8a95
 
 install_runc() {
 	# Do not build with ambient capabilities support
 	RUNC_BUILDTAGS="${RUNC_BUILDTAGS:-"seccomp apparmor selinux"}"
 
 	echo "Install runc version $RUNC_COMMIT"
-	git clone https://github.com/docker/runc.git "$GOPATH/src/github.com/opencontainers/runc"
+	git clone https://github.com/aliyun-fc/runc.git "$GOPATH/src/github.com/opencontainers/runc"
 	cd "$GOPATH/src/github.com/opencontainers/runc"
 	git checkout -q "$RUNC_COMMIT"
 	if [ -z "$1" ]; then
