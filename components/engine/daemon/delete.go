@@ -31,7 +31,7 @@ var cgroupFilePaths = map[string]string{"cpu,cpuacct":"/sys/fs/cgroup/cpu,cpuacc
 	"perf_event":"/sys/fs/cgroup/perf_event/docker/%s",
 	"pids":"/sys/fs/cgroup/pids/docker/%s"}
 
-// eemovePaths iterates over the provided paths removing them.
+// removePaths iterates over the provided paths removing them.
 // We trying to remove all paths five times with increasing delay between tries.
 // If after all there are not removed cgroups - appropriate error will be
 // returned.
@@ -187,7 +187,7 @@ func (daemon *Daemon) cleanupContainer(container *container.Container, forceRemo
 
 	err = removePaths(cgroupPaths)
 	if err != nil {
-		return fmt.Errorf("Fail to Destroy cgroups of container %s, err %s", container.ID, err)
+		return fmt.Errorf("Fail to destroy cgroups of container %s, err %s", container.ID, err)
 	}
 
 	linkNames := daemon.linkIndex.delete(container)
